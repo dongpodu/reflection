@@ -1,10 +1,7 @@
 package me.will.reflection;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Arrays;
 
 public class ClassTest extends Foo{
@@ -14,8 +11,9 @@ public class ClassTest extends Foo{
 
     public static void test() throws Exception {
         Class<ClassTest> clazz = ClassTest.class;
-        System.out.println(clazz.getName()); //me.will.reflection.ClassTest
-        System.out.println(clazz.getSimpleName());//ClassTest
+        System.out.println("name:"+clazz.getName()); //me.will.reflection.ClassTest
+        System.out.println("simpleName:"+clazz.getSimpleName());//ClassTest
+        System.out.println("canonicalName:"+clazz.getCanonicalName());
         System.out.println(clazz.getModifiers());//1
         System.out.println(Modifier.isPublic(clazz.getModifiers()));//true
 
@@ -51,6 +49,13 @@ public class ClassTest extends Foo{
         Arrays.stream(annotations).forEach(r->
                 System.out.println("annotation:"+r.toString())
         );
+
+        TypeVariable[] typeVariables = clazz.getTypeParameters();
+        Arrays.stream(typeVariables).forEach(r->
+                System.out.println("typeVariable:"+r.toString())
+        );
+
+
     }
 
 
